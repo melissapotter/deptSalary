@@ -50,7 +50,7 @@ fs.readFile('load_dept_emp.txt', 'utf8', function(err, data){
             
             // console.log(employeeDataArray[i].slice(8, 12));
             // console.log(employeeDataArray[i].slice(1,6));
-            employeeId[departmentId.indexOf(employeeDataArray[i].slice(8, 12))].push(employeeDataArray[i].slice(1,6));
+            employeeId[departmentId.indexOf(employeeDataArray[i].slice(8, 12))].push(employeeDataArray[i].slice(1, 6));
         }
     }
     
@@ -66,7 +66,6 @@ fs.readFile('load_salaries1.txt', 'utf8', function(err, data){
     var salaryDataClean = data.replace(/INSERT INTO `salaries` VALUES /g, "");
     var salaryDataArray = salaryDataClean.split('\n');
     
-    // console.log(salaryDataArray[0].slice(27, 31));
     
     for (var i = 0; i < salaryDataArray.length; i++) {
         if (salaryDataArray[i].slice(27, 31) == '9999') {
@@ -74,22 +73,20 @@ fs.readFile('load_salaries1.txt', 'utf8', function(err, data){
             for (var j = 0; j < employeeId.length; j++) {
                 for (var k = 0; k < employeeId[j].length; k++) {
                            
-                            console.log(employeeId[j][k]);
-                  if (salaryDataArray[i].slice(1, 6) == employeeId[j][k]) {
-                    salaryDataArray[i].slice(7, 12).push(salaryDataArray);
-                     console.log(salaryDataArray);
+                            // console.log(employeeId[j][k]); // iterates thru emp ID to find all current employees
+                  if (salaryDataArray[i].slice(1, 6) == employeeId[j][k]) { // if employee matches a current employee 
+                  // -- slice salary 7-12 and push it to salaries array
+                    salaries[employeeId[j][k].indexOf(salaryDataArray[i].slice(1, 6))].push(salaryDataArray[i].slice(7, 12));
+
                   }
                 }
+                
+            console.log(salaries);
             }
             
+        }
 
-            
-        }
-        // else {
-        //     console.log(salaryDataArray[i].slice(28,32));
-        // }
-            // salaries[departmentId.indexOf(salaryDataArray[i].slice(8, 12))].push(salaryDataArray[i].slice(1,6));
-        }
+    }
     });
     
     console.log(salaries);
