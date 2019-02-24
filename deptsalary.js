@@ -70,13 +70,24 @@ fs.readFile('load_salaries1.txt', 'utf8', function(err, data){
     
     for (var i = 0; i < salaryDataArray.length; i++) {
         if (salaryDataArray[i].slice(27, 31) == '9999') {
+            // console.log("Salary emp ID: ", salaryDataArray[i].slice(1, 6));
+            for (var j = 0; j < employeeId.length; j++) {
+                for (var k = 0; k < employeeId[j].length; k++) {
+                           
+                            console.log(employeeId[j][k]);
+                  if (salaryDataArray[i].slice(1, 6) == employeeId[j][k]) {
+                    salaryDataArray[i].slice(7, 12).push(salaryDataArray);
+                     console.log(salaryDataArray);
+                  }
+                }
+            }
             
-            console.log(salaryDataArray[i].slice(1, 6));
+
             
         }
-        else {
-            console.log(salaryDataArray[i].slice(28,32));
-        }
+        // else {
+        //     console.log(salaryDataArray[i].slice(28,32));
+        // }
             // salaries[departmentId.indexOf(salaryDataArray[i].slice(8, 12))].push(salaryDataArray[i].slice(1,6));
         }
     });
