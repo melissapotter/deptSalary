@@ -76,17 +76,17 @@ fs.readFile('load_salaries1.txt', 'utf8', function(err, data){
                             // console.log(employeeId[j][k]); // iterates thru emp ID to find all current employees
                   if (salaryDataArray[i].slice(1, 6) == employeeId[j][k]) { // if employee matches a current employee 
                   // -- slice salary 7-12 and push it to salaries array
-                    salaries[employeeId[j][k].indexOf(salaryDataArray[i].slice(1, 6))].push(salaryDataArray[i].slice(7, 12));
-
+                    salaries[j].push(salaryDataArray[i].slice(7, 12));
                   }
+                                console.log(salaries);
+
                 }
                 
-            console.log(salaries);
             }
-            
+
         }
+
 
     }
     });
     
-    console.log(salaries);
