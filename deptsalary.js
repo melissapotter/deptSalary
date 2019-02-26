@@ -74,19 +74,35 @@ fs.readFile('load_salaries1.txt', 'utf8', function(err, data){
                 for (var k = 0; k < employeeId[j].length; k++) {
                            
                             // console.log(employeeId[j][k]); // iterates thru emp ID to find all current employees
-                  if (salaryDataArray[i].slice(1, 6) == employeeId[j][k]) { // if employee matches a current employee 
+                  if (employeeId[j][k] == salaryDataArray[i].slice(1, 6)) { // if employee matches a current employee 
                   // -- slice salary 7-12 and push it to salaries array
                     salaries[j].push(salaryDataArray[i].slice(7, 12));
                   }
-                                console.log(salaries);
-
+                        
                 }
                 
             }
 
         }
 
-
     }
+    console.log(salaries);
     });
     
+    //Process 'load_employee.txt' file
+    // need to match salaries with emp names
+fs.readFile('load_employee.txt', 'utf8', function(err, data){
+    if (err) throw err;
+    
+    var employeeNameDataClean = data.replace(/INSERT INTO `employees` VALUES /g, "");
+    var employeeNameDataArray = employeeNameDataClean.split('\n');
+    
+    for (var i = 0; i < employeeNameDataArray.length; i++) {
+        if (employeeId == employeeNameDataArray[i].slice(1, 6)) {
+            employeeName[i].push(employeeNameDataArray[i].slice(21, -19));
+            }
+ 
+    }
+              console.log(employeeName);    
+
+});
